@@ -13,7 +13,7 @@ package ahorcadoo;
 public class Palabra {
     String unaPalabra;
     char letra[];
-    String palabras[]={"RABOT","parro","nadar","madre"};
+    String palabras[]={"robot","perro","nadar","madre"};
     void azar(){
     int x=(int) (Math.random()*5);
     unaPalabra=palabras[x];
