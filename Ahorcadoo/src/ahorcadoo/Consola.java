@@ -1,7 +1,13 @@
 package ahorcadoo;
 
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 
@@ -88,7 +94,8 @@ public class Consola extends javax.swing.JFrame {
         Respuesta = new javax.swing.JTextField();
         ok = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
-        Imagen = new javax.swing.JLabel();
+        imagen = new javax.swing.JLabel();
+        Letrero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -108,7 +115,6 @@ public class Consola extends javax.swing.JFrame {
         Texto.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         Texto.setText("Ingrese una letra : ");
 
-        Letra.setForeground(new java.awt.Color(255, 255, 255));
         Letra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LetraActionPerformed(evt);
@@ -160,6 +166,11 @@ public class Consola extends javax.swing.JFrame {
                 okMouseClicked(evt);
             }
         });
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Swis721 BlkOul BT", 0, 24)); // NOI18N
         titulo.setText("Ahorcado");
@@ -203,15 +214,22 @@ public class Consola extends javax.swing.JFrame {
                                             .addGap(18, 18, 18)
                                             .addComponent(Letra5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addComponent(pregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ok))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(23, 23, 23)))))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(Respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(74, 74, 74)
+                                            .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(ok)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Letrero)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -242,13 +260,15 @@ public class Consola extends javax.swing.JFrame {
                     .addComponent(si)
                     .addComponent(no))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ok))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ok))
+                    .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(Letrero)
+                .addGap(5, 5, 5)
+                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
@@ -272,8 +292,10 @@ public class Consola extends javax.swing.JFrame {
         miPalabra.separar();
         palabra.setText(miPalabra.unaPalabra);
         intentos = 0;
+        
     }//GEN-LAST:event_JugarMouseClicked
 
+    
     private void ok1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ok1MouseClicked
         letra = Letra.getText();
         x = letra.charAt(0);
@@ -302,7 +324,20 @@ public class Consola extends javax.swing.JFrame {
         if (error == true) {
             palabra.setText("error");
             intentos++;
+            /*
+            if (intentos ==1) {
+                    File miArchivo = new File("PrimerIntento.jpg"); 
+                try {
+                    BufferedImage miImagen = ImageIO.read(miArchivo);
+                     ImageIcon miIcono = new ImageIcon(miImagen);
+                     imagen.setIcon(miIcono);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+        */
         } else {
+        
             pregunta.setText("¿Conoce la palabra?");
             si.setVisible(true);
             si.setSelected(false);
@@ -315,7 +350,7 @@ public class Consola extends javax.swing.JFrame {
         error = true;
 
         if (intentos == 5) {
-            label.setText("Usted perdio");
+            Letrero.setText("Fa llas te ");
             Letra1.setEnabled(false);
             Letra2.setEnabled(false);
             Letra3.setEnabled(false);
@@ -369,19 +404,24 @@ public class Consola extends javax.swing.JFrame {
     private void okMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_okMouseClicked
         String ps = Respuesta.getText();
         if (miPalabra.unaPalabra == null ? ps == null : miPalabra.unaPalabra.equals(ps)) {
-            palabra.setText("Felicidades Gano");
+//            palabra.setText("Felicidades Gano");
+            Letrero.setText("Palabra correcta, ganaste");
+            
         } else {
-            palabra.setText(".");
+//            palabra.setText("No es la palabra, intenta de nuevo");
+            Letrero.setText("No es la palabra, intenta de nuevo");
             Letra1.setEnabled(false);
             Letra2.setEnabled(false);
             Letra3.setEnabled(false);
             Letra4.setEnabled(false);
+            Letra5.setEnabled(false);
             Letra.setEnabled(false);
             Letra.setText("");
             Letra1.setText("");
             Letra2.setText("");
             Letra3.setText("");
             Letra4.setText("");
+            Letra5.setText("");
         }
     }//GEN-LAST:event_okMouseClicked
 
@@ -392,6 +432,10 @@ public class Consola extends javax.swing.JFrame {
     private void LetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LetraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LetraActionPerformed
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okActionPerformed
  
     /**
      * @param args the command line arguments
@@ -430,7 +474,6 @@ public class Consola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Imagen;
     private javax.swing.JButton Jugar;
     private javax.swing.JTextField Letra;
     private javax.swing.JTextField Letra1;
@@ -438,8 +481,10 @@ public class Consola extends javax.swing.JFrame {
     private javax.swing.JTextField Letra3;
     private javax.swing.JTextField Letra4;
     private javax.swing.JTextField Letra5;
+    private javax.swing.JLabel Letrero;
     private javax.swing.JTextField Respuesta;
     private javax.swing.JLabel Texto;
+    private javax.swing.JLabel imagen;
     private javax.swing.JLabel label;
     private javax.swing.JRadioButton no;
     private javax.swing.JButton ok;
