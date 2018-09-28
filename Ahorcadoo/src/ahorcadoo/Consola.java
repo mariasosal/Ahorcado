@@ -1,6 +1,5 @@
 package ahorcadoo;
 
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,22 +8,17 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Estudiantes
  */
 public class Consola extends javax.swing.JFrame {
 
- 
     String letra;
     char x;
     char a;
@@ -35,7 +29,6 @@ public class Consola extends javax.swing.JFrame {
     boolean error = true;
     int intentos = 0;
     Palabra miPalabra = new Palabra();
-    
 
     void validar() {
         int puntaje = 0;
@@ -44,7 +37,6 @@ public class Consola extends javax.swing.JFrame {
         c = Letra3.getText().charAt(0);
         d = Letra4.getText().charAt(0);
         d = Letra5.getText().charAt(0);
-        
 
         if (a == miPalabra.letra[0]) {
             puntaje++;
@@ -61,17 +53,14 @@ public class Consola extends javax.swing.JFrame {
         if (e == miPalabra.letra[4]) {
             puntaje++;
         }
-        if(puntaje==5){
+        if (puntaje == 5) {
             palabra.setText("Felicidades Gano");
         }
     }
-    
-    
-    
+
     public Consola() {
         initComponents();
     }
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -292,52 +281,46 @@ public class Consola extends javax.swing.JFrame {
         miPalabra.separar();
         palabra.setText(miPalabra.unaPalabra);
         intentos = 0;
-        
+
     }//GEN-LAST:event_JugarMouseClicked
 
-    
+
     private void ok1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ok1MouseClicked
         letra = Letra.getText();
         x = letra.charAt(0);
 
         for (int i = 0; i < 5; i++) {
             if (x == miPalabra.letra[i]) {
-                if (i == 0) {
-                    Letra1.setText(String.valueOf(miPalabra.letra[i]));
-                }
-                if (i == 1) {
-                    Letra2.setText(String.valueOf(miPalabra.letra[i]));
-                }
-                if (i == 2) {
-                    Letra3.setText(String.valueOf(miPalabra.letra[i]));
-                }
-                if (i == 3) {
-                    Letra4.setText(String.valueOf(miPalabra.letra[i]));
-                }
-                if (i == 4) {
-                    Letra5.setText(String.valueOf(miPalabra.letra[i]));
-                }
-                error = false;
-            }
-        }
+                switch (i) {
+                    case 0:
+                        Letra1.setText(String.valueOf(miPalabra.letra[i]));
+                        error = false;
+                        break;
 
-        if (error == true) {
+                    case 1:
+                        Letra2.setText(String.valueOf(miPalabra.letra[i]));
+                        break;
+
+                    case 2:
+                        Letra3.setText(String.valueOf(miPalabra.letra[i]));
+                        break;
+
+                    case 3:
+                        Letra4.setText(String.valueOf(miPalabra.letra[i]));
+                        break;
+
+                    case 4:
+                        Letra5.setText(String.valueOf(miPalabra.letra[i]));
+                        error = false;
+                        break;
+                    default:
+                         if (error == true) {
             palabra.setText("error");
             intentos++;
-            /*
-            if (intentos ==1) {
-                    File miArchivo = new File("PrimerIntento.jpg"); 
-                try {
-                    BufferedImage miImagen = ImageIO.read(miArchivo);
-                     ImageIcon miIcono = new ImageIcon(miImagen);
-                     imagen.setIcon(miIcono);
-                } catch (IOException ex) {
-                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }
-        */
+            this.colocarImagen();
+
         } else {
-        
+
             pregunta.setText("¿Conoce la palabra?");
             si.setVisible(true);
             si.setSelected(false);
@@ -346,6 +329,13 @@ public class Consola extends javax.swing.JFrame {
 
         }
 
+                        
+                }
+
+            }
+        }
+
+       
         Letra.setText("");
         error = true;
 
@@ -365,6 +355,66 @@ public class Consola extends javax.swing.JFrame {
             Letra5.setText("");
         }
     }//GEN-LAST:event_ok1MouseClicked
+
+    private void colocarImagen() {
+
+        switch (intentos) {
+            case 1:
+
+                File miArchivo = new File("PrimerIntento.jpg");
+                try {
+                    BufferedImage miImagen = ImageIO.read(miArchivo);
+                    ImageIcon miIcono = new ImageIcon(miImagen);
+                    imagen.setIcon(miIcono);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:
+                File miArchivo2 = new File("SegundoIntento.jpg");
+                try {
+                    BufferedImage miImagen2 = ImageIO.read(miArchivo2);
+                    ImageIcon miIcono2 = new ImageIcon(miImagen2);
+                    imagen.setIcon(miIcono2);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 3:
+
+                File miArchivo3 = new File("TercerIntento.jpg");
+                try {
+                    BufferedImage miImagen3 = ImageIO.read(miArchivo3);
+                    ImageIcon miIcono3 = new ImageIcon(miImagen3);
+                    imagen.setIcon(miIcono3);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 4:
+                File miArchivo4 = new File("CuartoIntento.jpg");
+                try {
+                    BufferedImage miImagen4 = ImageIO.read(miArchivo4);
+                    ImageIcon miIcono4 = new ImageIcon(miImagen4);
+                    imagen.setIcon(miIcono4);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 5:
+                File miArchivo5 = new File("QuintoIntento.jpg");
+                try {
+                    BufferedImage miImagen5 = ImageIO.read(miArchivo5);
+                    ImageIcon miIcono5 = new ImageIcon(miImagen5);
+                    imagen.setIcon(miIcono5);
+                } catch (IOException ex) {
+                    Logger.getLogger(Consola.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+        }
+
+    }
+
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Letra1.setEnabled(false);
@@ -406,7 +456,7 @@ public class Consola extends javax.swing.JFrame {
         if (miPalabra.unaPalabra == null ? ps == null : miPalabra.unaPalabra.equals(ps)) {
 //            palabra.setText("Felicidades Gano");
             Letrero.setText("Palabra correcta, ganaste");
-            
+
         } else {
 //            palabra.setText("No es la palabra, intenta de nuevo");
             Letrero.setText("No es la palabra, intenta de nuevo");
@@ -436,7 +486,7 @@ public class Consola extends javax.swing.JFrame {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_okActionPerformed
- 
+
     /**
      * @param args the command line arguments
      */
