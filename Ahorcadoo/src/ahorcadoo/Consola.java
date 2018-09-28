@@ -295,39 +295,58 @@ public class Consola extends javax.swing.JFrame {
                     case 0:
                         Letra1.setText(String.valueOf(miPalabra.letra[i]));
                         error = false;
+                        pregunta.setText("¿Conoce la palabra?");
+            si.setVisible(true);
+            si.setSelected(false);
+            no.setVisible(true);
+            no.setSelected(false);
                         break;
 
                     case 1:
                         Letra2.setText(String.valueOf(miPalabra.letra[i]));
+                        error = false;
+                        pregunta.setText("¿Conoce la palabra?");
+            si.setVisible(true);
+            si.setSelected(false);
+            no.setVisible(true);
+            no.setSelected(false);
                         break;
 
                     case 2:
                         Letra3.setText(String.valueOf(miPalabra.letra[i]));
+                        error = false;
+                        pregunta.setText("¿Conoce la palabra?");
+            si.setVisible(true);
+            si.setSelected(false);
+            no.setVisible(true);
+            no.setSelected(false);
                         break;
 
                     case 3:
                         Letra4.setText(String.valueOf(miPalabra.letra[i]));
+                        error = false;
+                        pregunta.setText("¿Conoce la palabra?");
+            si.setVisible(true);
+            si.setSelected(false);
+            no.setVisible(true);
+            no.setSelected(false);
                         break;
 
                     case 4:
                         Letra5.setText(String.valueOf(miPalabra.letra[i]));
                         error = false;
-                        break;
-                    default:
-                         if (error == true) {
-            palabra.setText("error");
-            intentos++;
-            this.colocarImagen();
-
-        } else {
-
-            pregunta.setText("¿Conoce la palabra?");
+                        pregunta.setText("¿Conoce la palabra?");
             si.setVisible(true);
             si.setSelected(false);
             no.setVisible(true);
             no.setSelected(false);
+                        break;
+                    default:
+                         if (error == true) {
+                         intentos++;
+                         this.colocarImagen();
 
-        }
+        } 
 
                         
                 }
